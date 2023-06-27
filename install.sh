@@ -343,6 +343,28 @@ if [[ $install_nwg_displays =~ ^[Yy]$ ]]; then
   fi
 fi
 
+#clear screen
+clear
+
+### IM
+read -n1 -rep "${CAT} OPTIONAL - Would you like to install fcitx(CN) for IM? (y/n)" install_fcitx
+echo
+
+if [[ $install_fcitx =~ ^[Yy]$ ]]; then
+  printf "${NOTE} Installing fcitx related packages...\n"
+  for FPKG in fcitx5-input-support fcitx5-rime; do
+    install_package "$FPKG" 2>&1 | tee -a "$LOG"
+    if [ $? -ne 0 ]; then
+      echo -e "\e[1A\e[K${ERROR} - $FPKG install had failed, please check the install.log"
+      exit 1
+    fi
+  done
+fi
+
+#clear screen
+clear
+
+
 #themes and cursors
 read -n1 -rep "${CAT} OPTIONAL - Would you like to install Theme , Cursor, icons (Macos like)? (y/n)" inst2
 if [[ $inst2 =~ ^[Yy]$ ]]; then
