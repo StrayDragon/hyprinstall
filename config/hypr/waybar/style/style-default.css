@@ -88,25 +88,7 @@ tooltip label{
 #custom-updater,
 #custom-power,
 #custom-lock,
-#custom-weather,
 #window,
-#custom-weather.severe,
-#custom-weather.sunnyDay,
-#custom-weather.clearNight,
-#custom-weather.cloudyFoggyDay,
-#custom-weather.cloudyFoggyNight,
-#custom-weather.rainyDay,
-#custom-weather.rainyNight,
-#custom-weather.showyIcyDay,
-#custom-weather.snowyIcyNight,
-#custom-weather.default {
-  padding: 0px 10px;
-  color: #e5e5e5;
-  /* color: #bf616a; */
-  border-radius: 8px;
-  background-color: rgba(50, 50, 50, 0.1);
-  border: 1px solid #b4befe;
-}
 
 #workspaces {
   border-radius: 6px;
