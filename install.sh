@@ -330,6 +330,18 @@ sleep 2
 #clear screen
 clear
 
+### monitor settings helper for hyprland/sway
+read -n1 -rep "${CAT} OPTIONAL - Would you like to install nwg-displays (GUI) to change hyprland monitors settings? (y/n)" install_nwg_displays
+echo
+
+if [[ $install_nwg_displays =~ ^[Yy]$ ]]; then
+  install_package nwg-displays 2>&1 | tee -a "$LOG"
+  if [ $? -ne 0 ]; then
+      echo -e "\e[1A\e[K${ERROR} - nwg-displays install had failed, please check the install.log"
+      exit 1
+  fi
+fi
+
 #themes and cursors
 read -n1 -rep "${CAT} OPTIONAL - Would you like to install Theme , Cursor, icons (Macos like)? (y/n)" inst2
 if [[ $inst2 =~ ^[Yy]$ ]]; then
