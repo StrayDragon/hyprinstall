@@ -269,6 +269,7 @@ for PKG1 in foot swaybg swaylock-effects wofi wlogout mako grim slurp wl-clipboa
         exit 1
     fi
 done
+printf "\n%s - foot: you may need install package foot-terminfo on REMOTE HOST, see: https://codeberg.org/dnkl/foot/wiki#things-break-after-i-ssh-into-a-remote-machine \n" "${WARN}"
 
 for PKG2 in qt5ct btop jq gvfs gvfs-mtp ffmpegthumbs mpv curl pamixer brightnessctl xdg-user-dirs ristretto swappy mpv network-manager-applet cava gtk4; do
     install_package  "$PKG2" 2>&1 | tee -a "$LOG"
