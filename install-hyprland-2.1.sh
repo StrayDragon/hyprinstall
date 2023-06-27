@@ -278,13 +278,27 @@ for PKG2 in qt5ct btop jq gvfs gvfs-mtp ffmpegthumbs mpv curl pamixer brightness
     fi
 done
 
-for FONT in ttf-jetbrains-mono-nerd nerd-fonts-sarasa-term; do
+for CODE_FONT in ttf-jetbrains-mono-nerd nerd-fonts-sarasa-term; do
+    install_package  "$CODE_FONT" 2>&1 | tee -a "$LOG"
+        if [ $? -ne 0 ]; then
+        echo -e "\e[1A\e[K${ERROR} - $CODE_FONT install had failed, please check the install.log"
+        exit 1
+    fi
+done
+
+# install noto family fonts
+for FONT in noto-fonts noto-fonts-cjk noto-fonts-emoji noto-fonts-extra; do
     install_package  "$FONT" 2>&1 | tee -a "$LOG"
         if [ $? -ne 0 ]; then
         echo -e "\e[1A\e[K${ERROR} - $FONT install had failed, please check the install.log"
         exit 1
     fi
 done
+cp -r config/fonts.conf ~/.fonts.conf || { echo "Error: Failed to copy fonts config files."; exit 1; } 2>&1 | tee -a "$LOG"
+fc-cache -fv
+# all right if see:
+# NotoSansCJK-Regular.ttc: "Noto Sans CJK SC" "Regular"
+fc-match -s | grep 'Noto Sans CJK'
 
 # Check if waybar or waybar-hyprland is installed
 if pacman -Qs waybar > /dev/null; then
